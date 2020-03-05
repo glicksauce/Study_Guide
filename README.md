@@ -23,10 +23,16 @@ Include sign up/log in functionality, with encrypted passwords & an authorizatio
 ## Project Planning Checklist:
 When you start your project, start with these items:  
 (complete) A GitHub repo and a README with the following:  
-At least one wireframe of the front end  
+(complete) At least one wireframe of the front end  
 A bullet list of all features you will need to build in order to meet MVP and some stretch goal ideas.  
+    * Create new project, MVC folders
+    * Setup 7 RESTful routes with bare bones pages
+    * Setup Authenticaion sessions
+    * Format index, show, create, edit
+    * Format exam review page
+    * Link Skeleton.css
 (complete) The three pieces above (Problem / General App Idea / Who Would Use It) as bullet points.  
-A Trello containing the user stories needed to complete these features.  
+(complete) A Trello containing the user stories needed to complete these features. https://trello.com/b/X52gTjMI/study-guide  
 
 ## Stretch Goals Checklist:
 Recommended Features  
