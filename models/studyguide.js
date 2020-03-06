@@ -1,11 +1,16 @@
 const mongoose = require('mongoose')
 
+//https://mongoosejs.com/docs/subdocs.html
+const questionSchema = new mongoose.Schema({
+    question: String,
+    answers: Array,
+    correct_answer: Number
+})
+
 const guideSchema = new mongoose.Schema({
-    name: String,
+    guide_name: String,
     description: String,
-    img: String,
-    price: Number,
-    qty: Number
+    guide_data: [questionSchema]
 })
 
 const Guide = mongoose.model('Guide', guideSchema)
