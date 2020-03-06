@@ -74,11 +74,54 @@ router.get("/", (req,res) => {
 
 //SEED DATA ROUTE
 router.get('/seed', async (req, res) => {
+
+    
+    const questionSet0 = 
+    [
+        {
+            question: "Who was the first United States president?",
+            answers: ["Ben Franklin", "George Washington", "Thomas Jefferson", "Ben Franklin"],
+            correct_answer: 1
+        },
+        {
+            question: "Who was the second United States president?",
+            answers: ["John Adams", "John Quincy Adams", "Samuel Adams", "Adam Adams"],
+            correct_answer: 0
+        } 
+    ]  
+
+    const questionSet1 = 
+    [
+        {
+            question: "How many provinces and territories make up Canada?",
+            answers: ["10", "11", "12", "13"],
+            correct_answer: 3
+        },
+        {
+            question: "Which has the largest land area?",
+            answers: ["Ontario", "Quebec", "Northwest Territories", "Nunavut"],
+            correct_answer: 3
+        } 
+    ]  
+
     const newGuide =
-      []
+      [
+        {
+            guide_name: "Sample Quiz 1",
+            description: "A sample test",
+            guide_data:  questionSet0
+        }
+        ,
+        {
+            guide_name: "Sample Quiz 2",
+            description: "A sample test",
+            guide_data: questionSet1
+        }
+
+      ]
   
     try {
-      const seedItems = await Guide.create(newGuides)
+      const seedItems = await Guide.create(newGuide)
       res.send(seedItems)
     } catch (err) {
       res.send(err.message)

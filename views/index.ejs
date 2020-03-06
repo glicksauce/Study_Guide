@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    hi
+    <h1>Hello, here are you study guides:</h1>
+    <% for(let i = 0; i < guides.length; i++){ %>
+        <li><%=guides[i].guide_name%></li>
+       
+        <% } %>  
 </body>
 </html>
