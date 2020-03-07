@@ -17,13 +17,19 @@ const app = express()
 const port = 3000;
 const mongoose = require("mongoose")
 const methodOverride = require("method-override")
+const session = require('express-session')
 
 app.use(express.static('public'))
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride("_method"))
+app.use(session({
+  secret: "bananaPants", //some random string
+  resave: false,
+  saveUninitialized: false
+}));
 //app.use(express.json())
 
-// Connect mongoose to mongo db:
+// Connect mongoose to mongo db's:
 mongoose.connect("mongodb://localhost:27017/study_guide", {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -34,13 +40,37 @@ mongoose.connection.once("open", () => {
   });
 
 
+//required controllers:
 const guidesController = require('./controllers/studyguide.js')
 app.use('/studyguide', guidesController)
 
+const usersController = require('./controllers/users.js')
+app.use('/users', usersController)
+
+const sessionsController = require('./controllers/sessions.js');
+app.use('/sessions', sessionsController);
+
+//for logged in users only
+app.get('/app', (req, res)=>{
+  if(req.session.currentUser){
+      res.send('the party');
+  } else {
+      res.redirect('/sessions/new');
+  }
+});
 
 app.get('/', (req,res) =>{
     res.redirect('/studyguide')
 })
+
+/*
+app.post('/articles', (req, res)=>{
+    req.body.author = req.session.currentUser.username;
+    Article.create(req.body, (err, createdArticle)=>{
+        res.redirect('/articles');
+    });
+});
+*/
 
 // web server
 app.listen(port, () => {

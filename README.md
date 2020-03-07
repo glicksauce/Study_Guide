@@ -9,6 +9,9 @@ A study guide that lets you add your study material and then turns it into flash
 ###  Who would use it: 
 Students studying for a multpile choice exam
 
+## How to use this website
+* show how to use seed route  
+
 ## MVP Checklist:
 A working full-stack application, built by you, using Node.js, Mongoose, Express and EJS  
 Adhere to the MVC file structure: Models, Views, Controllers  

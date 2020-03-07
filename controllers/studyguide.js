@@ -67,7 +67,8 @@ router.post("/", (req,res) =>{
 router.get("/", (req,res) => {
       Guide.find({}, (error, guides) => {
         res.render("index.ejs", {
-          guides
+          guides: guides,
+          currentUser: req.session.currentUser
         })
       })
 })
