@@ -12,16 +12,23 @@
     <%- include("../partials/header.ejs") %>
     <div class="title-title">Study Guide Name:</div>
     <div class="title-input">
-        <input type="text" name="guide_name" value="<%=guides.guide_name%>"></div>
-    <div>
-        
+        <input type="text" name="guide_name" readonly="readonly" value="<%=guides.guide_name%>">
     </div>
-    <div class="new-question-title">New Question:</div>
-    <div class="new-question-input"><textArea></textArea></div>
-    <div class="new-answer-title">Answers:</div>
-    <div class="new-answer-input"><textArea></textArea></div>
-    <div class="new-correct-answer-title">Correct Answer:</div>
-    <div class="new-correct-answer-input"><textArea></textArea></div>
+    <div>
+        <form action="/studyguide/<%=guides.id%>/newquestion?_method=PUT" method="POST">
+            <div class="new-question-title">New Question:</div>
+            <div class="new-question-input"><textArea name="question"></textArea></div>
+            <div class="new-answer-title">Possible Answers:</div>
+            <div class="new-answer-input"><textArea name="answers"></textArea></div>
+            <div class="new-correct-answer-title">Correct Answer:</div>
+            <div class="new-correct-answer-input"><input type="number" name="correct_answer"></textArea></div>
+            <input type="submit" value="Add another question">
+        </form>
+    </div>
+    <form>
+        <input type="submit" value="Finish Guide">
+    </form>
+
 </div>
 </body>
 </html>

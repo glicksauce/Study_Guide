@@ -27,7 +27,7 @@ router.delete("/:id", (req, res) =>{
 // EDIT
 router.get('/:id/edit', (req,res) =>{
   Guide.findById(req.params.id, (err, foundGuide) => {
-    console.log(req.params.id, foundGuide)
+    //console.log(req.params.id, foundGuide)
     res.render(
       'guides/edit.ejs',
       {
@@ -37,25 +37,32 @@ router.get('/:id/edit', (req,res) =>{
   })
 })
 
-// PUT for Buy
-router.put('/:id/buy', (req, res)=>{
-   Guide.findById(req.params.id, (error, guide) => {
-    User.findByIdAndUpdate('5e5d465c8424640fc0989893', {$push: {shopping_cart: guide.name}}, {new:true}, (err,updateUser) =>{
-
-    })
-   })
-    Guide.findByIdAndUpdate(req.params.id, {$inc: {qty: -1}}, {new:true}, (err,updateModel) =>{
-      res.redirect('/guides')
-    })
-
+// PUT for adding question to guide
+router.put('/:id/newquestion', (req, res)=>{
+  console.log(req.body.answers[0])
+   Guide.findByIdAndUpdate(req.params.id, 
+    {
+      $push: 
+    {
+      guide_data: 
+        {
+          question: req.body.question,
+          correct_answer: req.body.correct_answer,
+          answers:[{0:"hi"},{1: "bye"}]       
+        }
+    }}, {new:true}, (err,updateUser) => {
+      res.redirect(`/studyguide/${req.params.id}/edit`)
+       })
   })
 
+  /*
 // PUT
 router.put('/:id', (req, res)=>{
   Guide.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updateModel) =>{
     res.redirect('/guides')
   })
 })
+*/
 
 // Create
 router.post("/", (req,res) =>{
