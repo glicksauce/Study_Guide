@@ -14,7 +14,7 @@ router.get("/json", (req,res) => {
 
 // NEW
 router.get("/new", (req, res) =>{
-    res.render("new.ejs")
+    res.render("guides/new.ejs")
 })
 
 // DELETE
@@ -27,8 +27,9 @@ router.delete("/:id", (req, res) =>{
 // EDIT
 router.get('/:id/edit', (req,res) =>{
   Guide.findById(req.params.id, (err, foundGuide) => {
+    console.log(req.params.id, foundGuide)
     res.render(
-      'edit.ejs',
+      'guides/edit.ejs',
       {
         guides: foundGuide
       }
@@ -59,8 +60,11 @@ router.put('/:id', (req, res)=>{
 // Create
 router.post("/", (req,res) =>{
 
-    Guide.create(req.body)
-    res.redirect("/guides")
+    Guide.create(req.body, (err, guide) => {
+      if (err) return err
+      res.redirect(`/studyguide/${guide.id}/edit`)
+    })
+    
 })
 
 // Index

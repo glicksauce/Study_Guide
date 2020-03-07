@@ -3,31 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include("./partials/head.ejs") %>
+    <title>Study Guide</title>
 </head>
 <body>
-    <h1>
+    <%- include("./partials/nav.ejs") %>
+    <%- include("./partials/header.ejs") %>
+
         <% if(currentUser) { %>
-            Welcome <%=currentUser.username%>! here are you study guides:
-            <% for(let i = 0; i < guides.length; i++){ %>
-                <li><%=guides[i].guide_name%></li>
-               
-            <% } %>  
-        <% } else { %>
-            Hello guest, please sign in
+            <main>
+                    Welcome to the <a href="/app">party</a>
+            </main>
         <% } %>
-    </h1>
-    <% if(currentUser) { %>
-        <main>
-                Welcome to the <a href="/app">party</a>
-        </main>
-    <% } %>
-    <% if(currentUser) { %>
-        <li>
-            <form action="/sessions?_method=DELETE" method="POST">
-                <input type="submit" value="Logout"/>
-            </form>
-        </li>
-    <% } %>
+
 </body>
 </html>

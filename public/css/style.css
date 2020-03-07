@@ -1,0 +1,28 @@
+aside{
+    float: left;
+    background: rgb(142, 184, 142);
+    width: 25%;
+    min-width: 200px;
+    height: 100%;
+    min-height: 800px;
+}
+
+.container{
+    width: 60%;
+    min-width: 500px;
+    float: left;
+}
+
+.menu-container{
+    height: 40px;
+    width: 100%;
+    background: tan;
+}
+
+.menu-box{
+    display: block;
+    float: left;
+    width: 30%;
+    margin-left: 2%;
+    text-align: center;
+}

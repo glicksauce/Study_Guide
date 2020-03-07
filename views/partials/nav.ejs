@@ -1,0 +1,24 @@
+<aside>
+    <div class="login">
+        <h2>
+            <% if(typeof currentUser != 'undefined') { %>
+                Welcome <%=currentUser.username%>!
+                <form action="/sessions?_method=DELETE" method="POST">
+                    <input type="submit" value="Logout"/>
+                </form>
+            <% } else { %>
+                Hello guest, please sign in:
+                <form action="/sessions/new" method="Get">
+                    <input type="submit" value="Sign In"/>
+                </form>
+                <form action="/users/new" method="Get">
+                    <input type="submit" value="Create Account"/>
+                </form>
+            <% } %>
+        </h2>
+    </div>
+    <div class="nav-header">Your Study Guides</div>
+    <div class="nav-items">Sample 1 </div>
+    <div class="nav-items">Sample 2 </div>
+    <div class="nav-items">Sample 3 </div>
+</aside>
