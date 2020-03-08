@@ -26,3 +26,7 @@ aside{
     margin-left: 2%;
     text-align: center;
 }
+
+.large-input{
+    width: 500px;
+}

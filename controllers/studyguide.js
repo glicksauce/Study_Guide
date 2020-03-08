@@ -39,7 +39,17 @@ router.get('/:id/edit', (req,res) =>{
 
 // PUT for adding question to guide
 router.put('/:id/newquestion', (req, res)=>{
-  console.log(req.body.answers[0])
+  
+  let formattedAnswers = []
+  let splitAnswers = req.body.answers.split("\n")
+      
+  for (i=0; i<splitAnswers.length; i++){
+    formattedAnswers.push(
+      {[i]: splitAnswers[i]}
+    )
+  }
+  console.log(formattedAnswers)
+
    Guide.findByIdAndUpdate(req.params.id, 
     {
       $push: 
@@ -48,7 +58,7 @@ router.put('/:id/newquestion', (req, res)=>{
         {
           question: req.body.question,
           correct_answer: req.body.correct_answer,
-          answers:[{0:"hi"},{1: "bye"}]       
+          answers: formattedAnswers
         }
     }}, {new:true}, (err,updateUser) => {
       res.redirect(`/studyguide/${req.params.id}/edit`)

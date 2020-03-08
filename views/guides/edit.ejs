@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include("../partials/head.ejs") %>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript"src='/js/guideFormat.js'></script>
+    <title>Your Cart</title>
     <title>Document</title>
     
 </head>
@@ -17,12 +20,12 @@
     <div>
         <form action="/studyguide/<%=guides.id%>/newquestion?_method=PUT" method="POST">
             <div class="new-question-title">New Question:</div>
-            <div class="new-question-input"><textArea name="question"></textArea></div>
+            <div class="new-question-input"><input type="text" class="large-input" name="question" ></div>
             <div class="new-answer-title">Possible Answers:</div>
-            <div class="new-answer-input"><textArea name="answers"></textArea></div>
+            <div class="new-answer-input"><textarea id="answers" class="large-input" value="this is a test" name="answers"></textarea></div>
             <div class="new-correct-answer-title">Correct Answer:</div>
-            <div class="new-correct-answer-input"><input type="number" name="correct_answer"></textArea></div>
-            <input type="submit" value="Add another question">
+            <div class="new-correct-answer-input"><input type="number" name="correct_answer"></div>
+            <input type="submit" id="addQuestion" value="Add another question">
         </form>
     </div>
     <form>
