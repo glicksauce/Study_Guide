@@ -39,7 +39,7 @@ router.get('/:id/edit', (req,res) =>{
 
 // PUT for adding question to guide
 router.put('/:id/newquestion', (req, res)=>{
-  
+  //splits potential answers by return then creates an array of objects before submitting that to mongodb
   let formattedAnswers = []
   let splitAnswers = req.body.answers.split("\n")
       
@@ -50,6 +50,7 @@ router.put('/:id/newquestion', (req, res)=>{
   }
   console.log(formattedAnswers)
 
+  //finds matching study guide and pushes in a question
    Guide.findByIdAndUpdate(req.params.id, 
     {
       $push: 
@@ -156,7 +157,8 @@ router.get('/seed', async (req, res) => {
 router.get("/:id", (req, res) => {
     Guide.findById(req.params.id, (err, showGuides) => {
       res.render("show.ejs", {
-        guides: showGuides
+        guides: showGuides,
+        currentUser: req.session.currentUser
       })
     })
   })

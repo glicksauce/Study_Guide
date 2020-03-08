@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript"src='/js/quiz.js'></script>
+    <link rel="stylesheet" href="/css/quiz.css">
+    <%- include("./partials/head.ejs") %>
+    <title>Study Guide</title>
+</head>
+<body>
+    <%- include("./partials/header.ejs") %>
+
+        <% if(currentUser) { %>
+           <div><h2><%=guides.guide_name%><h2></div>
+            <div><%=guides.description%></div>
+            <div class="question-length"><%=guides.guide_data.length%> Questions in this Study Guide:</div>
+            <input type="button" id="take-quiz" value="Take a quiz">
+            <% for (j=0;j < guides.guide_data.length; j++) { %>
+                <div class="quiz-question" id="<%=j%>" >
+                    <div><%=guides.guide_data[j].question%></div>
+                    <% for (k=0;k < guides.guide_data[j].answers.length; k++) { %>
+                        <div><%=guides.guide_data[j].answers[k]%></div>
+                    <% } %>
+                    <input type="button" class="next-button" value="Next Question">
+                </div>
+                
+            <% } %>
+        <% } else { %>
+            <div>You need to be logged in to view this page</div>
+        <% } %>
+
+</body>
+</html>

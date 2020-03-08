@@ -17,8 +17,11 @@
             <% } %>
         </h2>
     </div>
+<% if(typeof currentUser != 'undefined') { %>
     <div class="nav-header">Your Study Guides</div>
-    <div class="nav-items">Sample 1 </div>
-    <div class="nav-items">Sample 2 </div>
-    <div class="nav-items">Sample 3 </div>
+
+    <% for (i=0; i < guides.length; i++){ %>
+        <div class="nav-items"><a href="/studyguide/<%=guides[i].id%>"><%= guides[i].guide_name %></a></div>
+    <% } %>
+<% } %>
 </aside>
