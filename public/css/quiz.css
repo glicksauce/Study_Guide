@@ -13,3 +13,19 @@
     background: gray;
     font-weight: bold;
 }
+.quiz-title h2{
+    float: left;
+    width: 60%;
+}
+
+.quiz-status{
+    float:right;
+    border: 1px solid black;
+    width: 30%;
+    height: 100px;
+}
+
+.quiz-description{
+    clear: both;
+}
+
