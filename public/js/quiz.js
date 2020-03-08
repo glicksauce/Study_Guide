@@ -1,9 +1,34 @@
 $(()=>{
+
+
     $('.quiz-question').hide()
     console.log("running")
     let randomOrderArray = []
     let quizProgress = 0
     let currentQuestion
+
+const checkAnswers = () =>{
+    $('.answer').on("click",(event)=>{
+        event.stopPropagation()
+        let questionClicked = event.target.id.substring(12)
+        let correctAnswer = $(event.target).siblings(".correct-answer").text()
+        console.log("clicked: " + questionClicked + "correct answer " + correctAnswer)
+        //console.log($(event.target).siblings(".correct-answer").text())
+
+        //create answer reveal div but keep it hidden for now:
+        $answerCheck = $('<div>').text("").addClass("answer-reveal")
+        $('.answer-section').append($answerCheck)
+
+        if (questionClicked == correctAnswer) {
+            $('.answer-reveal').text("Correct")
+        } else {
+            $('.answer-reveal').text("Incorrect")
+        }
+       
+
+
+    })
+}
 
 const endQuiz = () =>{
     console.log("quiz is over")
@@ -20,6 +45,7 @@ const presentQuestion = (num) =>{
     } else {
         
         $('#' + num).show()
+        
         currentQuestion = num
         quizProgress++
     }
@@ -29,6 +55,8 @@ const presentQuestion = (num) =>{
 const presentQuiz = () =>{
     //hide take quiz button
     $('#take-quiz').hide()
+
+    checkAnswers()
 
     let questionCount = $('.quiz-question').length;
     
@@ -58,6 +86,8 @@ const presentQuiz = () =>{
 $('.next-button').on('click', (event) =>{
     //hide current question
     $('#' + currentQuestion).hide()
+    //remove current answer reveal
+    $(".answer-reveal").remove()
     //trigger next question
     presentQuestion(randomOrderArray[quizProgress])
 })

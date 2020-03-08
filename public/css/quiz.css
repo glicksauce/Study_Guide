@@ -1,5 +1,15 @@
 .quiz-question{
-    background: orange;
+ border: solid 2px black;
+}
 
+.question{
+    border-bottom: 1px solid gray;
+}
 
+.correct-answer{
+    visibility: hidden;
+}
+.answer:hover{
+    background: gray;
+    font-weight: bold;
 }

@@ -19,14 +19,18 @@
             <input type="button" id="take-quiz" value="Take a quiz">
             <% for (j=0;j < guides.guide_data.length; j++) { %>
                 <div class="quiz-question" id="<%=j%>" >
-                    <div><%=guides.guide_data[j].question%></div>
-                    <% for (k=0;k < guides.guide_data[j].answers.length; k++) { %>
-                        <div><%=guides.guide_data[j].answers[k]%></div>
-                    <% } %>
+                    <div class="question">
+                        <%=guides.guide_data[j].question%>
+                        <% for (k=0;k < guides.guide_data[j].answers.length; k++) { %>
+                            <div class="answer" id="set<%=j%>-answer-<%=k%>"><%=guides.guide_data[j].answers[k]%></div>
+                        <% } %>
+                        <div class="correct-answer"><%=guides.guide_data[j].correct_answer%></div>
+                    </div>
                     <input type="button" class="next-button" value="Next Question">
                 </div>
                 
             <% } %>
+            <div class="answer-section"></div>
         <% } else { %>
             <div>You need to be logged in to view this page</div>
         <% } %>
