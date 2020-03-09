@@ -1,6 +1,13 @@
 $(()=>{
     console.log("up and running")
 
+    //if question is already populated goes into edit mode
+    console.log($('#question-input').val())
+    if ($('#question-input').val() != "undefined"){
+            console.log("something")      
+    }
+
+
     //submits question to db
     $('#addquestion').submit(function(){
             $.ajax({

@@ -20,7 +20,9 @@
             <div class="question-length"><%=guides.guide_data.length%> Questions in this Study Guide:</div>
             <div class="quiz-button-options">
                 <input type="button" id="take-quiz" value="Take this quiz">
-                <input type="button" id="edit-quiz" value="Edit this quiz">
+                <form action='/studyguide/<%=guides.id%>/edit/list' method="GET">
+                    <input type="submit" id="edit-quiz" value="Edit this quiz">
+                </form>
                 <form action='/studyguide/<%=guides.id%>?_method=DELETE' method="POST">
                     <input type="submit" id="delete-quiz" value="Delete this quiz">
                 </form>

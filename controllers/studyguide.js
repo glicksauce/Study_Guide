@@ -24,6 +24,36 @@ router.delete("/:id", (req, res) =>{
   })
 })
 
+
+// EDIT Expanded - edits an individual question
+router.get('/:id/edit/list/:question', (req,res) =>{
+  Guide.findById(req.params.id, (err, foundGuide) => {
+    //console.log(req.params.id, foundGuide)
+    res.render(
+      'guides/edit.ejs',
+      {
+        guides: foundGuide,
+        question: foundGuide.guide_data[req.params.question]
+      }
+    )
+  })
+})
+
+// EDIT Expanded - gets list of questions
+router.get('/:id/edit/list', (req,res) =>{
+  Guide.findById(req.params.id, (err, foundGuide) => {
+    //console.log(req.params.id, foundGuide)
+    res.render(
+      'guides/editlist.ejs',
+      {
+        guides: foundGuide
+      }
+    )
+  })
+})
+
+
+
 // EDIT
 router.get('/:id/edit', (req,res) =>{
   Guide.findById(req.params.id, (err, foundGuide) => {
@@ -31,11 +61,13 @@ router.get('/:id/edit', (req,res) =>{
     res.render(
       'guides/edit.ejs',
       {
-        guides: foundGuide
+        guides: foundGuide,
+        question: {question: "", answers: "", correct_answer:""}
       }
     )
   })
 })
+
 
 // PUT for adding question to guide
 router.put('/:id/newquestion', (req, res)=>{
