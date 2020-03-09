@@ -88,7 +88,7 @@ $(()=>{
     //prepare to take quiz
     const presentQuiz = () =>{
         //hide take quiz button
-        $('#take-quiz').hide()
+        $('.quiz-button-options').hide()
 
         let questionCount = $('.quiz-question').length;
         

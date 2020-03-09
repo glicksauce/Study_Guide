@@ -5,12 +5,19 @@ source: https://git.generalassemb.ly/ira/SEIR-FLEX-123/tree/master/projects/proj
 ### Problem: 
 I want to quiz myself on my study material but I accidentally keep revealing the answer, the questions always come in the same order, and the answers are always the same letter.
 ### General App Idea: 
-A study guide that lets you add your study material and then turns it into flash cards
+A study guide that lets you add your study material and then turns it into flash cards which show in random order as well as random question order
 ###  Who would use it: 
 Students studying for a multpile choice exam
 
-## How to use this website
-* show how to use seed route  
+
+## Website Explanation
+* what approach was taken  
+* unsolved problmens  
+* user stories  
+* notes to myself  
+* show how to use website  
+    - show how to use seed route  
+    - show how login functionatlity works  
 
 ## MVP Checklist:
 A working full-stack application, built by you, using Node.js, Mongoose, Express and EJS  

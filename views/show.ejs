@@ -18,7 +18,13 @@
            <div class="quiz-title"><h2><%=guides.guide_name%></h2></div>
             <div class="quiz-description"><%=guides.description%></div>
             <div class="question-length"><%=guides.guide_data.length%> Questions in this Study Guide:</div>
-            <input type="button" id="take-quiz" value="Take a quiz">
+            <div class="quiz-button-options">
+                <input type="button" id="take-quiz" value="Take this quiz">
+                <input type="button" id="edit-quiz" value="Edit this quiz">
+                <form action='/studyguide/<%=guides.id%>?_method=DELETE' method="POST">
+                    <input type="submit" id="delete-quiz" value="Delete this quiz">
+                </form>
+            </div>
             <% for (j=0;j < guides.guide_data.length; j++) { %>
                 <div class="quiz-question" id="<%=j%>" >
                     <div class="question">

@@ -20,7 +20,7 @@ router.get("/new", (req, res) =>{
 // DELETE
 router.delete("/:id", (req, res) =>{
   Guide.findByIdAndDelete(req.params.id, (err, data) =>{
-    res.redirect('/guides')
+    res.redirect('/studyguide')
   })
 })
 
