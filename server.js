@@ -14,10 +14,11 @@ Restful Routes
 
 const express = require('express')
 const app = express()
-const port = 3000;
+const PORT = 3000;
 const mongoose = require("mongoose")
 const methodOverride = require("method-override")
 const session = require('express-session')
+const mongoURI = process.env.MONGODB_URI
 
 app.use(express.static('public'))
 app.use(express.urlencoded({extended:true}))
@@ -73,6 +74,6 @@ app.post('/articles', (req, res)=>{
 */
 
 // web server
-app.listen(port, () => {
-    console.log("listening on port ", port)
+app.listen(PORT, () => {
+    console.log("listening on port ", PORT)
 })
