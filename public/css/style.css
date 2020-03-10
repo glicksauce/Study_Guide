@@ -7,10 +7,39 @@ aside{
     min-height: 800px;
 }
 
-h2{
-    width: 100%;
+.title{
+    width: 60%;
+    min-width: 250px;
+    text-align: center;
+    margin: 0 20%;
 }
 
+.title h1{
+    margin: 8px 15px;
+    display: inline-block;
+}
+
+.title img{
+    display: inline-block;
+    width: 40px;
+}
+
+.title h3{
+    font-size: 1.8em;
+}
+
+h2{
+    width: 100%;
+    margin: 10px;
+}
+
+h3{
+  margin: 5px 10px;
+}
+
+.authentication {
+    margin: 10px;
+}
 .container{
     width: 60%;
     min-width: 500px;
@@ -20,14 +49,27 @@ h2{
 .menu-container{
     height: 40px;
     width: 100%;
-    background: tan;
+    min-width: 560px;
+    border: 5px solid black;
+    border-radius: 5px;
+    background: rgb(194, 183, 183);
+    margin: 0 10px;
 }
 
 .menu-box{
     display: block;
     float: left;
     width: 30%;
-    margin-left: 2%;
+    text-align: center;
+    height: 100%;
+}
+
+.menu-box:hover{
+    background: tan;
+    font-weight: bold;
+}
+
+.login h3{
     text-align: center;
 }
 

@@ -1,13 +1,13 @@
 <aside>
     <div class="login">
-        <h2>
+        
             <% if(typeof currentUser != 'undefined') { %>
-                Welcome <%=currentUser.username%>!
+                <h3>Welcome <%=currentUser.username%>!</h3>
                 <form action="/sessions?_method=DELETE" method="POST">
                     <input type="submit" value="Logout"/>
                 </form>
             <% } else { %>
-                Hello guest, please sign in:
+                <h3>Hello guest, please sign in:</h3>
                 <form action="/sessions/new" method="Get">
                     <input type="submit" value="Sign In"/>
                 </form>
@@ -15,7 +15,7 @@
                     <input type="submit" value="Create Account"/>
                 </form>
             <% } %>
-        </h2>
+        </h3>
     </div>
 <% if(typeof currentUser != 'undefined') { %>
     <div class="nav-header">Your Study Guides</div>

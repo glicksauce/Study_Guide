@@ -17,7 +17,7 @@
         <input type="text" name="guide_name" readonly="readonly" value="<%=guides.guide_name%>">
     </div>
     <div>
-        <form action="/studyguide/<%=guides.id%>/newquestion?_method=PUT" method="POST">
+        <form action="/studyguide/<%=guides.id%>/newquestion/<%=question.id%>?_method=PUT" method="POST">
             <div class="new-question-title">Question:</div>
             <div class="new-question-input"><input id="question-input" type="text" class="large-input" name="question" value="<%=question.question%>"></div>
             <div class="new-answer-title">Possible Answers:</div>

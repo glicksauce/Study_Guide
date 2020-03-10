@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Guide = require("../models/studyguide.js");
+const Question = require("../models/studyguide.js");
 
 // ROUTES
 
@@ -62,23 +63,51 @@ router.get('/:id/edit', (req,res) =>{
       'guides/edit.ejs',
       {
         guides: foundGuide,
-        question: {question: "", answers: "", correct_answer:""}
+        //passing blank question properties
+        question: {id: "", question: "", answers: "", correct_answer:""}
       }
     )
   })
 })
 
+// PUT for modifying existing question in quide
+// similiar to PUT route but takes question id
+router.put('/:id/newquestion/:questionid', (req, res)=>{
 
-// PUT for adding question to guide
-router.put('/:id/newquestion', (req, res)=>{
   //splits potential answers by return then creates an array of objects before submitting that to mongodb
   let formattedAnswers = []
   let splitAnswers = req.body.answers.split("\n")
       
   for (i=0; i<splitAnswers.length; i++){
-    formattedAnswers.push(
-      {[i]: splitAnswers[i]}
-    )
+    formattedAnswers[i] = splitAnswers[i]
+  }
+  console.log(formattedAnswers)
+  console.log("updating existing question, question id:", req.params.questionid)
+  //finds matching study guide and pushes in a question
+  Question.update(req.params.questionid, guide_data,
+    {
+      $set: 
+    {
+          question: req.body.question,
+          correct_answer: req.body.correct_answer,
+          answers: formattedAnswers
+    }
+    }, {new:true}, (err,updateUser) => {
+      console.log(updateUser)
+      console.log(err)
+      res.redirect(`/studyguide/${req.params.id}/edit`)
+       })
+  })
+
+
+// PUT for adding question to guide
+router.put('/:id/newquestion/', (req, res)=>{
+  //splits potential answers by return then creates an array of objects before submitting that to mongodb
+  let formattedAnswers = []
+  let splitAnswers = req.body.answers.split("\n")
+      
+  for (i=0; i<splitAnswers.length; i++){
+    formattedAnswers[i] = splitAnswers[i]
   }
   console.log(formattedAnswers)
 
