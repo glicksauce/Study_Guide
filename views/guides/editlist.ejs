@@ -12,22 +12,23 @@
 <body>
     <%- include("../partials/nav.ejs") %>
     <%- include("../partials/header.ejs") %>
-    <h1>Edit Your Study Guide Questions</h1>
-    <div class="title-title">Study Guide Name:</div>
-    <div class="title-input">
-        <input type="text" name="guide_name" readonly="readonly" value="<%=guides.guide_name%>">
+    <div class="quiz-container">
+        <h1>Edit Your Study Guide Questions</h1>
+        <div class="title-title">Study Guide Name:</div>
+        <div class="title-input">
+            <input type="text" name="guide_name" readonly="readonly" value="<%=guides.guide_name%>">
+        </div>
+        <div>
+
+                <div class="question-list-title">Questions:</div>
+                <% for (i=0; i < guides.guide_data.length; i++){ %>
+                    <form action="/studyguide/<%=guides.id%>/edit/list/<%=i%>" method="GET">
+                        <button type="submit" class="question-list"><%=guides.guide_data[i].question%></button>
+                    </form>
+                <% } %>
+
+        </div>
     </div>
-    <div>
-
-            <div class="question-list-title">Questions:</div>
-            <% for (i=0; i < guides.guide_data.length; i++){ %>
-                <form action="/studyguide/<%=guides.id%>/edit/list/<%=i%>" method="GET">
-                   <button type="submit" class="question-list"><%=guides.guide_data[i].question%></button>
-                </form>
-            <% } %>
-
-    </div>
-
 
 </div>
 </body>

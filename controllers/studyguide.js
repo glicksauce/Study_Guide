@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const Guide = require("../models/studyguide.js");
-const Question = require("../models/studyguide.js");
+
 
 // ROUTES
 
 //JSON Route
 router.get("/json", (req,res) => {
-    Guide.find({}, (error, guides) => {
+    Guide.Guide.find({}, (error, guides) => {
 
         return res.json(guides)
   })
@@ -20,7 +20,7 @@ router.get("/new", (req, res) =>{
 
 // DELETE
 router.delete("/:id", (req, res) =>{
-  Guide.findByIdAndDelete(req.params.id, (err, data) =>{
+  Guide.Guide.findByIdAndDelete(req.params.id, (err, data) =>{
     res.redirect('/studyguide')
   })
 })
@@ -28,7 +28,7 @@ router.delete("/:id", (req, res) =>{
 
 // EDIT Expanded - edits an individual question
 router.get('/:id/edit/list/:question', (req,res) =>{
-  Guide.findById(req.params.id, (err, foundGuide) => {
+  Guide.Guide.findById(req.params.id, (err, foundGuide) => {
     //console.log(req.params.id, foundGuide)
     res.render(
       'guides/edit.ejs',
@@ -42,7 +42,7 @@ router.get('/:id/edit/list/:question', (req,res) =>{
 
 // EDIT Expanded - gets list of questions
 router.get('/:id/edit/list', (req,res) =>{
-  Guide.findById(req.params.id, (err, foundGuide) => {
+  Guide.Guide.findById(req.params.id, (err, foundGuide) => {
     //console.log(req.params.id, foundGuide)
     res.render(
       'guides/editlist.ejs',
@@ -57,7 +57,7 @@ router.get('/:id/edit/list', (req,res) =>{
 
 // EDIT
 router.get('/:id/edit', (req,res) =>{
-  Guide.findById(req.params.id, (err, foundGuide) => {
+  Guide.Guide.findById(req.params.id, (err, foundGuide) => {
     //console.log(req.params.id, foundGuide)
     res.render(
       'guides/edit.ejs',
@@ -84,19 +84,32 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
   console.log(formattedAnswers)
   console.log("updating existing question, question id:", req.params.questionid)
   //finds matching study guide and pushes in a question
-  Question.update(req.params.questionid, guide_data,
+
+  Guide.Question.find({}, (error, questions) => {
+    console.log(questions)
+  })
+  
+  
+  /*
+  Question.findById({req.params.question}, (error, questions) => {
+    console.log(questions)
+  })
+  */
+
+  /*
+  Guide.Question.findByIdAndUpdate(req.params.questionid, 
     {
-      $set: 
-    {
-          question: req.body.question,
+          guide_question: req.body.question,
           correct_answer: req.body.correct_answer,
           answers: formattedAnswers
     }
-    }, {new:true}, (err,updateUser) => {
-      console.log(updateUser)
-      console.log(err)
+    , {new:true}, (err,updateUser) => {
+      //console.log(updateUser)
       res.redirect(`/studyguide/${req.params.id}/edit`)
-       })
+          })
+*/
+
+      
   })
 
 
@@ -112,7 +125,7 @@ router.put('/:id/newquestion/', (req, res)=>{
   console.log(formattedAnswers)
 
   //finds matching study guide and pushes in a question
-   Guide.findByIdAndUpdate(req.params.id, 
+   Guide.Guide.findByIdAndUpdate(req.params.id, 
     {
       $push: 
     {
@@ -139,7 +152,7 @@ router.put('/:id', (req, res)=>{
 // Create
 router.post("/", (req,res) =>{
 
-    Guide.create(req.body, (err, guide) => {
+    Guide.Guide.create(req.body, (err, guide) => {
       if (err) return err
       res.redirect(`/studyguide/${guide.id}/edit`)
     })
@@ -148,7 +161,7 @@ router.post("/", (req,res) =>{
 
 // Index
 router.get("/", (req,res) => {
-      Guide.find({}, (error, guides) => {
+      Guide.Guide.find({}, (error, guides) => {
         res.render("index.ejs", {
           guides: guides,
           currentUser: req.session.currentUser
@@ -205,7 +218,7 @@ router.get('/seed', async (req, res) => {
       ]
   
     try {
-      const seedItems = await Guide.create(newGuide)
+      const seedItems = await Guide.Guide.create(newGuide)
       res.send(seedItems)
     } catch (err) {
       res.send(err.message)
@@ -216,25 +229,19 @@ router.get('/seed', async (req, res) => {
   
 // Show
 router.get("/:id", (req, res) => {
-  /*
-    Guide.findById(req.params.id, (err, showGuide) => {
-      res.render("show.ejs", {
-        guides: Guide.find({}),
-        guide: showGuide,
-        currentUser: req.session.currentUser
-      })
-    })
-    */
-   Guide.find({}, (error, guides) => {
-     let guide = ''
+
+   Guide.Guide.find({}, (error, guides) => {
+     let guide
     for (let element of guides){
       console.log(element.id, req.params.id)
       if (element.id == req.params.id){
         guide = element
       }
-      //console.log(guide)
+      
     }
-    res.render("index.ejs", {
+    console.log(guide.guide_name)
+    console.log(req.session.currentUser)
+    res.render("show.ejs", {
       guides: guides,
       guide: guide,
       currentUser: req.session.currentUser

@@ -59,7 +59,7 @@ $(()=>{
         let quizScore = Math.floor((correctAnswerCount/randomOrderArray.length) * 10000)
         quizScore = quizScore / 100
         $quizResults = $('<div>').text("The quiz is over. You scored: " + correctAnswerCount + " out of " + randomOrderArray.length + ", " + quizScore + "%")
-        $('.question-length').append($quizResults)
+        $('.quiz-container').append($quizResults)
     }
 
         
@@ -87,8 +87,9 @@ $(()=>{
 
     //prepare to take quiz
     const presentQuiz = () =>{
-        //hide take quiz button
+        //hide take quiz button and 
         $('.quiz-button-options').hide()
+        $('.question-length').hide()
 
         let questionCount = $('.quiz-question').length;
         

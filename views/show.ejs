@@ -13,10 +13,10 @@
 <body>
     <%- include("./partials/nav.ejs") %>
     <%- include("./partials/header.ejs") %>
-
         <% if(currentUser) { %>
+        <div class="quiz-container">
            <div class="quiz-title"><h2><%=guide.guide_name%></h2></div>
-            <div class="quiz-description"><%=guide.description%></div>
+            <div class="quiz-description"><h4><%=guide.description%></h4></div>
             <div class="question-length"><%=guide.guide_data.length%> Questions in this Study Guide:</div>
             <div class="quiz-button-options">
                 <input type="button" id="take-quiz" value="Take this quiz">
@@ -41,6 +41,7 @@
                 
             <% } %>
             <div class="answer-section"></div>
+        <div>
         <% } else { %>
             <div>You need to be logged in to view this page</div>
         <% } %>
