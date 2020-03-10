@@ -22,6 +22,7 @@ $(()=>{
 
         console.log($('#correct-answer').val())
         
+        /*
         if ( $('#correct-answer').val() != ""){
             $.ajax({
                 type: "POST",
@@ -31,7 +32,7 @@ $(()=>{
             window.location.href = '/'
             console.log("empty")
         }
-        
+        */
         
     })
 
