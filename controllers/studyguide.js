@@ -26,16 +26,15 @@ router.delete("/:id", (req, res) =>{
 })
 
 
-// EDIT Expanded - edits an individual question
+// EDIT Expanded - edits an individual question, :id is the guide id, :question is number in the guide_array
 router.get('/:id/edit/list/:question', (req,res) =>{
   Guide.Guide.findById(req.params.id, (err, foundGuide) => {
-    //console.log(req.params.id, foundGuide)
     res.render(
       'guides/edit.ejs',
       {
-        guides: foundGuide,
-        question: foundGuide.guide_data[req.params.question],
-        question_number: req.params.question
+        guides: foundGuide, //all study guide info. Used in Nav panel
+        question: foundGuide.guide_data[req.params.question], //just the selected study guide
+        question_number: req.params.question //position in the array of questions for that study guide
       }
     )
   })
@@ -44,7 +43,6 @@ router.get('/:id/edit/list/:question', (req,res) =>{
 // EDIT Expanded - gets list of questions
 router.get('/:id/edit/list', (req,res) =>{
   Guide.Guide.findById(req.params.id, (err, foundGuide) => {
-    //console.log(req.params.id, foundGuide)
     res.render(
       'guides/editlist.ejs',
       {
@@ -57,9 +55,9 @@ router.get('/:id/edit/list', (req,res) =>{
 
 
 // EDIT
+// For adding new questions to existing study guide
 router.get('/:id/edit', (req,res) =>{
   Guide.Guide.findById(req.params.id, (err, foundGuide) => {
-    //console.log(req.params.id, foundGuide)
     res.render(
       'guides/edit.ejs',
       {
@@ -73,7 +71,7 @@ router.get('/:id/edit', (req,res) =>{
 })
 
 // PUT for modifying existing question in quide
-// similiar to PUT route but takes question id
+// similiar to PUT route but takes question id which the order question is positioned in array of questions
 router.put('/:id/newquestion/:questionid', (req, res)=>{
 
   //splits potential answers by return then creates an array of objects before submitting that to mongodb
@@ -85,32 +83,50 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
   }
   console.log(formattedAnswers)
   console.log("updating existing question, question id:", req.params.questionid)
-  //finds matching study guide and pushes in a question
 
-  /*
-  Guide.Guide.findById(req.params.id, (error, questions) => {
-    console.log(questions.guide_data[1])
-  })
-  */
-  
 
-  
+  //locates study guide then locates 
   Guide.Guide.findByIdAndUpdate(req.params.id, 
     {
-      guide_data:
+      $set:
     
       {
-            question: req.body.question,
-            correct_answer: req.body.correct_answer,
-            answers: formattedAnswers
+        "guide_data[req.params.questionid]":
+      
+        {
+              question: req.body.question,
+              correct_answer: req.body.correct_answer,
+              answers: formattedAnswers
+        }
       }
     }
     , {new:true}, (err,updateUser) => {
-      //console.log(updateUser)
       res.redirect(`/studyguide/${req.params.id}/edit`)
-          })
+      })
 
+
+/*
+Guide.Guide.findByIdAndUpdate(req.params.id, {new:true}, (err,updateUser) => {
+    
+  console.log(updateUser.guide_data[req.params.questionid])
+    {
+      $set:
+    
+      {
+        guide_data[req.params.questionid]:
       
+        {
+              question: req.body.question,
+              correct_answer: req.body.correct_answer,
+              answers: formattedAnswers
+        }
+      }
+    }
+    
+    res.redirect(`/studyguide/${req.params.id}/edit`)
+    })
+*/
+
 })
 
 
