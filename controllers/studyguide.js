@@ -216,13 +216,33 @@ router.get('/seed', async (req, res) => {
   
 // Show
 router.get("/:id", (req, res) => {
-    Guide.findById(req.params.id, (err, showGuides) => {
+  /*
+    Guide.findById(req.params.id, (err, showGuide) => {
       res.render("show.ejs", {
-        guides: showGuides,
+        guides: Guide.find({}),
+        guide: showGuide,
         currentUser: req.session.currentUser
       })
     })
+    */
+   Guide.find({}, (error, guides) => {
+     let guide = ''
+    for (let element of guides){
+      console.log(element.id, req.params.id)
+      if (element.id == req.params.id){
+        guide = element
+      }
+      //console.log(guide)
+    }
+    res.render("index.ejs", {
+      guides: guides,
+      guide: guide,
+      currentUser: req.session.currentUser
+    })
   })
+
+
+})
 
 
 

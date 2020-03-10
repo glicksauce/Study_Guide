@@ -15,26 +15,26 @@
     <%- include("./partials/header.ejs") %>
 
         <% if(currentUser) { %>
-           <div class="quiz-title"><h2><%=guides.guide_name%></h2></div>
-            <div class="quiz-description"><%=guides.description%></div>
-            <div class="question-length"><%=guides.guide_data.length%> Questions in this Study Guide:</div>
+           <div class="quiz-title"><h2><%=guide.guide_name%></h2></div>
+            <div class="quiz-description"><%=guide.description%></div>
+            <div class="question-length"><%=guide.guide_data.length%> Questions in this Study Guide:</div>
             <div class="quiz-button-options">
                 <input type="button" id="take-quiz" value="Take this quiz">
-                <form action='/studyguide/<%=guides.id%>/edit/list' method="GET">
+                <form action='/studyguide/<%=guide.id%>/edit/list' method="GET">
                     <input type="submit" id="edit-quiz" value="Edit this quiz">
                 </form>
-                <form action='/studyguide/<%=guides.id%>?_method=DELETE' method="POST">
+                <form action='/studyguide/<%=guide.id%>?_method=DELETE' method="POST">
                     <input type="submit" id="delete-quiz" value="Delete this quiz">
                 </form>
             </div>
-            <% for (j=0;j < guides.guide_data.length; j++) { %>
+            <% for (j=0;j < guide.guide_data.length; j++) { %>
                 <div class="quiz-question" id="<%=j%>" >
                     <div class="question">
-                        <%=guides.guide_data[j].question%>
-                        <% for (k=0;k < guides.guide_data[j].answers.length; k++) { %>
-                            <div class="answer" id="set<%=j%>-answer-<%=k%>"><%=guides.guide_data[j].answers[k]%></div>
+                        <%=guide.guide_data[j].question%>
+                        <% for (k=0;k < guide.guide_data[j].answers.length; k++) { %>
+                            <div class="answer" id="set<%=j%>-answer-<%=k%>"><%=guide.guide_data[j].answers[k]%></div>
                         <% } %>
-                        <div class="correct-answer"><%=guides.guide_data[j].correct_answer%></div>
+                        <div class="correct-answer"><%=guide.guide_data[j].correct_answer%></div>
                     </div>
                     <input type="button" class="next-button" value="Next Question">
                 </div>

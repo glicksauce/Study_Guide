@@ -3,8 +3,8 @@ aside{
     background: rgb(142, 184, 142);
     width: 20%;
     min-width: 200px;
-    height: 100%;
-    min-height: 800px;
+    height: 100vh;
+    min-height: 200px
 }
 
 .title{
@@ -59,6 +59,7 @@ h3{
 .menu-box{
     display: block;
     float: left;
+    font-size: 1.2em;
     width: 30%;
     text-align: center;
     height: 100%;
@@ -69,8 +70,26 @@ h3{
     font-weight: bold;
 }
 
-.login h3{
+.login{
     text-align: center;
+}
+
+.login input{
+    width: 200px;
+}
+
+.nav-header{
+    margin: 40px 0 0 8%;
+    font-size: 1.5em;
+}
+
+.nav-items{
+    margin: 2px 0 0 8%;
+}
+
+form{
+    margin: 0;
+    padding: 0;
 }
 
 .large-input{
