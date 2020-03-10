@@ -100,7 +100,7 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
       guide_data:
     
       {
-            guide_question: req.body.question,
+            question: req.body.question,
             correct_answer: req.body.correct_answer,
             answers: formattedAnswers
       }
