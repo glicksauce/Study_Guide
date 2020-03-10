@@ -1,3 +1,17 @@
+/*
+Restful Routes
+#	Action	|URL	                  |HTTP Verb	|EJS view 	|mongoose method
+1	Index	  |/studyguide/           |GET        |index.ejs  |Guide.find()
+2	Show	  |/studyguide/:id        |GET        |show.ejs   |Guide.findById()		
+3	New	    |/studyguide/new        |GET        |new.ejs	  |none
+4	Create	|/studyguide/	          |POST       |none       |Guide.create(req.body)
+5	Edit	  |/studyguide/:id/edit	  |GET        |edit.ejs   |Guide.findById()
+6	Update	|/studyguide/:id        |PUT        |none       |Guide.findByIdAndUpdate()
+7	Destroy	|/studyguide/:id        |DELETE     |none       |Guide.findByIdAndDelete()	
+*/
+
+
+
 const express = require('express')
 const router = express.Router()
 const Guide = require("../models/studyguide.js");
@@ -7,7 +21,7 @@ const Guide = require("../models/studyguide.js");
 
 //JSON Route
 router.get("/json", (req,res) => {
-    Guide.Guide.find({}, (error, guides) => {
+    Guide.find({}, (error, guides) => {
 
         return res.json(guides)
   })
@@ -20,7 +34,7 @@ router.get("/new", (req, res) =>{
 
 // DELETE
 router.delete("/:id", (req, res) =>{
-  Guide.Guide.findByIdAndDelete(req.params.id, (err, data) =>{
+  Guide.findByIdAndDelete(req.params.id, (err, data) =>{
     res.redirect('/studyguide')
   })
 })
@@ -28,7 +42,7 @@ router.delete("/:id", (req, res) =>{
 
 // EDIT Expanded - edits an individual question, :id is the guide id, :question is number in the guide_array
 router.get('/:id/edit/list/:question', (req,res) =>{
-  Guide.Guide.findById(req.params.id, (err, foundGuide) => {
+  Guide.findById(req.params.id, (err, foundGuide) => {
     res.render(
       'guides/edit.ejs',
       {
@@ -42,7 +56,7 @@ router.get('/:id/edit/list/:question', (req,res) =>{
 
 // EDIT Expanded - gets list of questions
 router.get('/:id/edit/list', (req,res) =>{
-  Guide.Guide.findById(req.params.id, (err, foundGuide) => {
+  Guide.findById(req.params.id, (err, foundGuide) => {
     res.render(
       'guides/editlist.ejs',
       {
@@ -57,7 +71,7 @@ router.get('/:id/edit/list', (req,res) =>{
 // EDIT
 // For adding new questions to existing study guide
 router.get('/:id/edit', (req,res) =>{
-  Guide.Guide.findById(req.params.id, (err, foundGuide) => {
+  Guide.findById(req.params.id, (err, foundGuide) => {
     res.render(
       'guides/edit.ejs',
       {
@@ -70,7 +84,7 @@ router.get('/:id/edit', (req,res) =>{
   })
 })
 
-// PUT for modifying existing question in quide
+// UPDATE for modifying existing question in quide
 // similiar to PUT route but takes question id which the order question is positioned in array of questions
 router.put('/:id/newquestion/:questionid', (req, res)=>{
 
@@ -86,7 +100,7 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
 
 
   //locates study guide then locates 
-  Guide.Guide.findByIdAndUpdate(req.params.id, 
+  Guide.findByIdAndUpdate(req.params.id, 
     {
       $set:
     
@@ -106,7 +120,7 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
 
 
 /*
-Guide.Guide.findByIdAndUpdate(req.params.id, {new:true}, (err,updateUser) => {
+Guide.findByIdAndUpdate(req.params.id, {new:true}, (err,updateUser) => {
     
   console.log(updateUser.guide_data[req.params.questionid])
     {
@@ -130,7 +144,7 @@ Guide.Guide.findByIdAndUpdate(req.params.id, {new:true}, (err,updateUser) => {
 })
 
 
-// PUT for adding question to guide
+// UPDATE for adding question to guide
 router.put('/:id/newquestion/', (req, res)=>{
   //splits potential answers by return then creates an array of objects before submitting that to mongodb
   let formattedAnswers = []
@@ -142,7 +156,7 @@ router.put('/:id/newquestion/', (req, res)=>{
   console.log(formattedAnswers)
 
   //finds matching study guide and pushes in a question
-   Guide.Guide.findByIdAndUpdate(req.params.id, 
+   Guide.findByIdAndUpdate(req.params.id, 
     {
       $push: 
     {
@@ -157,19 +171,11 @@ router.put('/:id/newquestion/', (req, res)=>{
        })
   })
 
-  /*
-// PUT
-router.put('/:id', (req, res)=>{
-  Guide.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updateModel) =>{
-    res.redirect('/guides')
-  })
-})
-*/
 
 // Create
 router.post("/", (req,res) =>{
 
-    Guide.Guide.create(req.body, (err, guide) => {
+    Guide.create(req.body, (err, guide) => {
       if (err) return err
       res.redirect(`/studyguide/${guide.id}/edit`)
     })
@@ -178,7 +184,7 @@ router.post("/", (req,res) =>{
 
 // Index
 router.get("/", (req,res) => {
-      Guide.Guide.find({}, (error, guides) => {
+      Guide.find({}, (error, guides) => {
         res.render("index.ejs", {
           guides: guides,
           currentUser: req.session.currentUser
@@ -235,7 +241,7 @@ router.get('/seed', async (req, res) => {
       ]
   
     try {
-      const seedItems = await Guide.Guide.create(newGuide)
+      const seedItems = await Guide.create(newGuide)
       res.send(seedItems)
     } catch (err) {
       res.send(err.message)
@@ -247,7 +253,7 @@ router.get('/seed', async (req, res) => {
 // Show
 router.get("/:id", (req, res) => {
 
-   Guide.Guide.find({}, (error, guides) => {
+   Guide.find({}, (error, guides) => {
      let guide
     for (let element of guides){
       console.log(element.id, req.params.id)

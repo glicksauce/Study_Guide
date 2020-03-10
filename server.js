@@ -1,16 +1,6 @@
 //https://git.generalassemb.ly/ira/SEIR-FLEX-123/tree/master/projects/project_2
 
-/*
-Restful Routes
-#	Action	|URL	                |HTTP Verb	|EJS view 	|mongoose method
-1	Index	|/studyguide/           |GET        |index.ejs  |Guide.find()
-2	Show	|/studyguide/:id        |GET        |show.ejs   |Guide.findById()		
-3	New	    |/studyguide/new        |GET        |new.ejs	|none
-4	Create	|/studyguide/	        |POST       |none       |Guide.create(req.body)
-5	Edit	|/studyguide/:id/edit	|GET        |edit.ejs   |Guide.findById()
-6	Update	|/studyguide/:id        |PUT        |none       |Guide.findByIdAndUpdate()
-7	Destroy	|/studyguide/:id        |DELETE     |none       |Guide.findByIdAndDelete()	
-*/
+
 
 const express = require('express')
 const app = express()

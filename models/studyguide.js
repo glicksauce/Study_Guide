@@ -19,4 +19,4 @@ const guideSchema = new mongoose.Schema({
 const Guide = mongoose.model('Guide', guideSchema)
 const Question = mongoose.model('Question', questionSchema)
 
-module.exports = {Guide,Question}
+module.exports = Guide
