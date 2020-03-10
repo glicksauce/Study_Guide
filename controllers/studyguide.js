@@ -34,7 +34,8 @@ router.get('/:id/edit/list/:question', (req,res) =>{
       'guides/edit.ejs',
       {
         guides: foundGuide,
-        question: foundGuide.guide_data[req.params.question]
+        question: foundGuide.guide_data[req.params.question],
+        question_number: req.params.question
       }
     )
   })
@@ -64,7 +65,8 @@ router.get('/:id/edit', (req,res) =>{
       {
         guides: foundGuide,
         //passing blank question properties
-        question: {id: "", question: "", answers: "", correct_answer:""}
+        question: {id: "", question: "", answers: "", correct_answer:""},
+        question_number: ""
       }
     )
   })
@@ -85,32 +87,31 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
   console.log("updating existing question, question id:", req.params.questionid)
   //finds matching study guide and pushes in a question
 
-  Guide.Question.find({}, (error, questions) => {
-    console.log(questions)
-  })
-  
-  
   /*
-  Question.findById({req.params.question}, (error, questions) => {
-    console.log(questions)
+  Guide.Guide.findById(req.params.id, (error, questions) => {
+    console.log(questions.guide_data[1])
   })
   */
+  
 
-  /*
-  Guide.Question.findByIdAndUpdate(req.params.questionid, 
+  
+  Guide.Guide.findByIdAndUpdate(req.params.id, 
     {
-          guide_question: req.body.question,
-          correct_answer: req.body.correct_answer,
-          answers: formattedAnswers
+      guide_data:
+    
+      {
+            guide_question: req.body.question,
+            correct_answer: req.body.correct_answer,
+            answers: formattedAnswers
+      }
     }
     , {new:true}, (err,updateUser) => {
       //console.log(updateUser)
       res.redirect(`/studyguide/${req.params.id}/edit`)
           })
-*/
 
       
-  })
+})
 
 
 // PUT for adding question to guide
