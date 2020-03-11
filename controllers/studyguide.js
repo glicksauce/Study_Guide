@@ -85,7 +85,7 @@ router.get('/:id/edit', (req,res) =>{
 })
 
 // UPDATE for modifying existing question in quide
-// similiar to PUT route but takes question id which the order question is positioned in array of questions
+// similiar to other UPDATE route but takes question id which the order question is positioned in array of questions
 router.put('/:id/newquestion/:questionid', (req, res)=>{
 
   //splits potential answers by return then creates an array of objects before submitting that to mongodb
@@ -99,21 +99,17 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
   console.log("updating existing question, question id:", req.params.questionid)
 
 
+  let mongoVar = 'guide_data.'+req.params.questionid
+  let mongoVarObject = {}
+  mongoVarObject[mongoVar] = 
+    {question: req.body.question,
+    correct_answer: req.body.correct_answer,
+    answers: formattedAnswers}
+  console.log(mongoVarObject)
+
   //locates study guide then locates 
   Guide.findByIdAndUpdate(req.params.id, 
-    {
-      $set:
-    
-      {
-        "guide_data[req.params.questionid]":
-      
-        {
-              question: req.body.question,
-              correct_answer: req.body.correct_answer,
-              answers: formattedAnswers
-        }
-      }
-    }
+    {$set:mongoVarObject}
     , {new:true}, (err,updateUser) => {
       res.redirect(`/studyguide/${req.params.id}/edit`)
       })
