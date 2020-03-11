@@ -21,11 +21,11 @@ app.use(session({
 
 // Connect mongoose to mongo db's:
 let uristring = 
-process.env.MONGOLAB_URI || process.env.MONGOHQ_URL
+process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/study_guide';
 
 mongoose.connect(uristring, (err, res) => {
   if (err) {
-    console.log ("ERROR connecting to: " + uristring + ". " + err + " Process.env.MONGOLAB_URI is " + process.env.MONGODB_URI + " Process.env.MONGOHQ_URL is " + process.env.MONGOHQ_URL);
+    console.log ("ERROR connecting to: " + uristring + ". " + err + " Process.env.MONGOLAB_URI is " + process.env.MONGODB_URI + " Process.env.MONGOHQ_URL is " + process.env.MONGOHQ_URL) + " uristring is " + uristring;
   } else {
     console.log("Succedded connected to: " + uristring)
   }
