@@ -15,7 +15,6 @@ Restful Routes
 const express = require('express')
 const router = express.Router()
 const Guide = require("../models/studyguide.js");
-const session = require('express-session')
 
 // ROUTES
 

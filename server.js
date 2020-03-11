@@ -25,7 +25,15 @@ process.env.MONGOLAB_URI ||
 process.env.MONGOHQ_URL ||
 'mongodb://localhost:27017/study_guide'
 
-mongoose.connect(uristring, {
+mongoose.connect(uristring, (err, res) => {
+  if (err) {
+    console.log ("ERROR connecting to: " + uristring + ". " + err);
+  } else {
+    console.log("Succedded connected to: " + uristring)
+  }
+},
+
+{
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
