@@ -23,7 +23,7 @@ app.use(session({
 let uristring = 
 process.env.MONGOLAB_URI || 'mongodb://localhost:27017/study_guide';
 
-mongoose.connect(uristring, (err, res) => {
+mongoose.connect('mongodb://heroku_l3ptbltj:m9ddbm4gmjqbg5jpjth157g3eo@ds143737.mlab.com:43737/heroku_l3ptbltj', (err, res) => {
   
   if (err) {
     console.log ("ERROR connecting to: " + uristring + ". " + err + " Process.env.MONGOLAB_URI is " + process.env.MONGODB_URI + " Process.env.MONGOHQ_URL is " + process.env.MONGOHQ_URL + " uristring is " + uristring);
