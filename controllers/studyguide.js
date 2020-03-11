@@ -42,6 +42,32 @@ router.delete("/:id", (req, res) =>{
 
 // EDIT Expanded - edits an individual question, :id is the guide id, :question is number in the guide_array
 router.get('/:id/edit/list/:question', (req,res) =>{
+
+  Guide.find({}, (error, guides) => {
+    let guide
+    //need to get all guides so that we can list them in nav bar
+    //this is how we also pull the guide we are working with on the show page
+    //cycle through all guides and match by element.id
+    for (let element of guides){
+        //console.log(element.id, req.params.id)
+        if (element.id == req.params.id){
+          guide = element
+      }
+      
+    }
+    console.log(guide)
+
+    res.render("guides/edit.ejs", {
+      guides: guides,
+      guide: guide,
+      question: guide.guide_data[req.params.question],
+      question_number: req.params.question,
+      currentUser: req.session.currentUser
+    })
+
+})
+
+  /*
   Guide.findById(req.params.id, (err, foundGuide) => {
     res.render(
       'guides/edit.ejs',
@@ -52,18 +78,34 @@ router.get('/:id/edit/list/:question', (req,res) =>{
       }
     )
   })
+  */
 })
 
 // EDIT Expanded - gets list of questions
 router.get('/:id/edit/list', (req,res) =>{
-  Guide.findById(req.params.id, (err, foundGuide) => {
-    res.render(
-      'guides/editlist.ejs',
-      {
-        guides: foundGuide
+  
+  Guide.find({}, (error, guides) => {
+      let guide
+      //need to get all guides so that we can list them in nav bar
+      //this is how we also pull the guide we are working with on the show page
+      //cycle through all guides and match by element.id
+      for (let element of guides){
+          //console.log(element.id, req.params.id)
+          if (element.id == req.params.id){
+            guide = element
+        }
+        
       }
-    )
+
+      res.render("guides/editlist.ejs", {
+        guides: guides,
+        guide: guide,
+        currentUser: req.session.currentUser
+      })
+
   })
+
+
 })
 
 
@@ -78,7 +120,8 @@ router.get('/:id/edit', (req,res) =>{
         guides: foundGuide,
         //passing blank question properties
         question: {id: "", question: "", answers: "", correct_answer:""},
-        question_number: ""
+        question_number: "",
+        currentUser: req.session.currentUser
       }
     )
   })
@@ -98,7 +141,8 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
   console.log(formattedAnswers)
   console.log("updating existing question, question id:", req.params.questionid)
 
-
+  //need to lookup guide then need to work specific question within guide. Before running query need to get object that we will then pass into the query
+  //req.params.questionid is the array index we are working with
   let mongoVar = 'guide_data.'+req.params.questionid
   let mongoVarObject = {}
   mongoVarObject[mongoVar] = 
@@ -107,36 +151,12 @@ router.put('/:id/newquestion/:questionid', (req, res)=>{
     answers: formattedAnswers}
   console.log(mongoVarObject)
 
-  //locates study guide then locates 
+  //now run the query
   Guide.findByIdAndUpdate(req.params.id, 
     {$set:mongoVarObject}
     , {new:true}, (err,updateUser) => {
       res.redirect(`/studyguide/${req.params.id}/edit`)
       })
-
-
-/*
-Guide.findByIdAndUpdate(req.params.id, {new:true}, (err,updateUser) => {
-    
-  console.log(updateUser.guide_data[req.params.questionid])
-    {
-      $set:
-    
-      {
-        guide_data[req.params.questionid]:
-      
-        {
-              question: req.body.question,
-              correct_answer: req.body.correct_answer,
-              answers: formattedAnswers
-        }
-      }
-    }
-    
-    res.redirect(`/studyguide/${req.params.id}/edit`)
-    })
-*/
-
 })
 
 
@@ -251,6 +271,10 @@ router.get("/:id", (req, res) => {
 
    Guide.find({}, (error, guides) => {
      let guide
+
+     //need to get all guides so that we can list them in nav bar
+     //this is how we also pull the guide we are working with on the show page
+     //cycle through all guides and match by element.id
     for (let element of guides){
       console.log(element.id, req.params.id)
       if (element.id == req.params.id){
@@ -269,7 +293,5 @@ router.get("/:id", (req, res) => {
 
 
 })
-
-
 
 module.exports = router;

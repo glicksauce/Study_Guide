@@ -18,7 +18,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-//app.use(express.json())
 
 // Connect mongoose to mongo db's:
 mongoose.connect("mongodb://localhost:27017/study_guide", {

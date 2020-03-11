@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include("../partials/head.ejs") %>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript"src='/js/guideEdit.js'></script>>
+    <script type="text/javascript"src='/js/guideFormat.js'></script>>
     <title>Edit Study Guide</title>
     
 </head>
@@ -16,14 +16,14 @@
         <h1>Edit Your Study Guide Questions</h1>
         <div class="title-title">Study Guide Name:</div>
         <div class="title-input">
-            <input type="text" name="guide_name" readonly="readonly" value="<%=guides.guide_name%>">
+            <input type="text" name="guide_name" readonly="readonly" value="<%=guide.guide_name%>">
         </div>
         <div>
 
                 <div class="question-list-title">Questions:</div>
-                <% for (i=0; i < guides.guide_data.length; i++){ %>
-                    <form action="/studyguide/<%=guides.id%>/edit/list/<%=i%>" method="GET">
-                        <button type="submit" class="question-list"><%=guides.guide_data[i].question%></button>
+                <% for (i=0; i < guide.guide_data.length; i++){ %>
+                    <form action="/studyguide/<%=guide.id%>/edit/list/<%=i%>" method="GET">
+                        <button type="submit" class="question-list"><%=guide.guide_data[i].question%></button>
                     </form>
                 <% } %>
 
