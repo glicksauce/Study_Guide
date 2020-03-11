@@ -27,7 +27,7 @@ process.env.MONGOHQ_URL ||
 
 mongoose.connect(uristring, (err, res) => {
   if (err) {
-    console.log ("ERROR connecting to: " + uristring + ". " + err);
+    console.log ("ERROR connecting to: " + uristring + ". " + err + " Process.env.MONGOLAB_URI is " + process.env.MONGODB_URI + " Process.env.MONGOHQ_URL is " + process.env.MONGOHQ_URL);
   } else {
     console.log("Succedded connected to: " + uristring)
   }
