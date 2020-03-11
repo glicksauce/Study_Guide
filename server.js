@@ -21,9 +21,7 @@ app.use(session({
 
 // Connect mongoose to mongo db's:
 let uristring = 
-process.env.MONGOLAB_URI ||
-process.env.MONGOHQ_URL ||
-'mongodb://localhost:27017/study_guide'
+process.env.MONGOLAB_URI || process.env.MONGOHQ_URL
 
 mongoose.connect(uristring, (err, res) => {
   if (err) {
