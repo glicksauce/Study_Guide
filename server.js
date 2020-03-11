@@ -20,7 +20,12 @@ app.use(session({
 }));
 
 // Connect mongoose to mongo db's:
-mongoose.connect("mongodb://localhost:27017/study_guide", {
+let uristring = 
+process.env.MONGOLAB_URI ||
+process.env.MONGOHQ_URL ||
+'mongodb://localhost:27017/study_guide'
+
+mongoose.connect(uristring, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
