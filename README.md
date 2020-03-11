@@ -1,9 +1,9 @@
 # Study_Guide
-Study guide lets you create flash cards out of your study material for multiple choice tests
-source: https://git.generalassemb.ly/ira/SEIR-FLEX-123/tree/master/projects/project_2
+Study guide lets you create flash cards out of your study material for multiple choice tests.  
+source: https://git.generalassemb.ly/ira/SEIR-FLEX-123/tree/master/projects/project_2  
 completed project on heroku: https://flash-card-study-guide.herokuapp.com/
-git: https://github.com/glicksauce/Study_Guide
-Heroku: https://flash-card-study-guide.herokuapp.com/studyguide
+git: https://github.com/glicksauce/Study_Guide  
+Heroku: https://flash-card-study-guide.herokuapp.com/studyguide  
 
 ### Problem: 
 I want to quiz myself on my study material but I accidentally keep revealing the answer, the questions always come in the same order, and the answers are always the same letter.
@@ -15,21 +15,21 @@ Students studying for a multpile choice exam
 
 ## Website Explanation
 * what approach was taken  
- - I had an idea in my head of what I wanted the site to be and set to to realize it one feature at a time. Not a very high level approach and the smallest of changes had challenges but it was very rewarded to complete.  
+  * I had an idea in my head of what I wanted the site to be and set to to realize it one feature at a time. Not a very high level approach and the smallest of changes had challenges but it was very rewarded to complete.  
 
 * unsolved problmens  
- - Any exam created shows up for all users instead of just the user that created it. Need to add more userSchema to only display Guide.id's in that array.  
- - When editing a question, the potential answers are not formatted correctly. Need to use some JS to fix  
+  * Any exam created shows up for all users instead of just the user that created it. Need to add more userSchema to only display Guide.id's in that array.  
+  * When editing a question, the potential answers are not formatted correctly. Need to use some JS to fix  
  
 * user stories  
-- See my trello board: https://trello.com/b/X52gTjMI/study-guide  
+  * See my trello board: https://trello.com/b/X52gTjMI/study-guide  
 
 * notes to myself  
-- don't use subdocs/subSchema/nested schema ever again. Make everything separate and do joins.  
+  * don't use subdocs/subSchema/nested schema ever again. Make everything separate and do joins.  
 
 * show how to use website  
-    - show how to use seed route  
-    - show how login functionatlity works  
+* show how to use seed route  
+* show how login functionatlity works  
 
 ## MVP Checklist:
 (complete) A working full-stack application, built by you, using Node.js, Mongoose, Express and EJS  
