@@ -62,7 +62,7 @@ router.get('/:id/edit/list/:question', (req,res) =>{
       guide: guide,
       question: guide.guide_data[req.params.question],
       question_number: req.params.question,
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser || undefined
     })
 
   })
