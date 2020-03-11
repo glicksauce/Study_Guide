@@ -22,7 +22,7 @@ app.use(session({
 // Connect mongoose to mongo db's:
 //process.env.MONGOLAB_URI = 'mongodb://heroku_l3ptbltj:m9ddbm4gmjqbg5jpjth157g3eo@ds143737.mlab.com:43737/heroku_l3ptbltj'
 let uristring = 
-process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/study_guide';
+process.env.MONGOLAB_URI || 'mongodb://localhost:27017/study_guide';
 
 mongoose.connect(uristring, (err, res) => {
   
