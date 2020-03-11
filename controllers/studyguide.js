@@ -55,7 +55,7 @@ router.get('/:id/edit/list/:question', (req,res) =>{
       }
       
     }
-    console.log(guide)
+    console.log("Edit Route Guide is: ", guide)
 
     res.render("guides/edit.ejs", {
       guides: guides,
@@ -65,7 +65,7 @@ router.get('/:id/edit/list/:question', (req,res) =>{
       currentUser: req.session.currentUser
     })
 
-})
+  })
 
   /*
   Guide.findById(req.params.id, (err, foundGuide) => {
@@ -113,6 +113,31 @@ router.get('/:id/edit/list', (req,res) =>{
 // EDIT
 // For adding new questions to existing study guide
 router.get('/:id/edit', (req,res) =>{
+
+  Guide.find({}, (error, guides) => {
+    let guide
+    //need to get all guides so that we can list them in nav bar
+    //this is how we also pull the guide we are working with on the show page
+    //cycle through all guides and match by element.id
+    for (let element of guides){
+        //console.log(element.id, req.params.id)
+        if (element.id == req.params.id){
+          guide = element
+      }
+      
+    }
+
+    res.render("guides/edit.ejs", {
+      guides: guides,
+      guide: guide,
+      question: {id: "", question: "", answers: "", correct_answer:""},
+      question_number: "",
+      currentUser: req.session.currentUser
+    })
+
+})
+
+  /*
   Guide.findById(req.params.id, (err, foundGuide) => {
     res.render(
       'guides/edit.ejs',
@@ -125,6 +150,7 @@ router.get('/:id/edit', (req,res) =>{
       }
     )
   })
+  */
 })
 
 // UPDATE for modifying existing question in quide
@@ -200,6 +226,7 @@ router.post("/", (req,res) =>{
 
 // Index
 router.get("/", (req,res) => {
+  console.log("index referenced", req.session)
       Guide.find({}, (error, guides) => {
         res.render("index.ejs", {
           guides: guides,
