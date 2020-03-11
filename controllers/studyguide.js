@@ -15,7 +15,7 @@ Restful Routes
 const express = require('express')
 const router = express.Router()
 const Guide = require("../models/studyguide.js");
-
+const session = require('express-session')
 
 // ROUTES
 
@@ -226,7 +226,6 @@ router.post("/", (req,res) =>{
 
 // Index
 router.get("/", (req,res) => {
-  console.log("index referenced", req.session)
       Guide.find({}, (error, guides) => {
         res.render("index.ejs", {
           guides: guides,
