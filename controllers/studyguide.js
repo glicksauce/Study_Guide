@@ -28,7 +28,18 @@ router.get("/json", (req,res) => {
 
 // NEW
 router.get("/new", (req, res) =>{
-    res.render("guides/new.ejs")
+  Guide.find({}, (error, guides) => {
+
+    res.render("guides/new.ejs", {
+      guides: guides,
+      currentUser: req.session.currentUser || undefined
+    })
+
+  })
+  /*
+    res.render("guides/new.ejs",
+    )
+  */
 })
 
 // DELETE
