@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("./partials/head.ejs") %>
+    <title>Study Guide</title>
+</head>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <%- include("./partials/header.ejs") %>
+    <div class="about-container">
+        <h2>About</h2>
+        <p>This is a study guide tool built using node.js and RESTful API</p>
+        <p>Users can login and create study guides; which are sets of multiple choice questions and a correct answers. Users can then quiz themselves on the test, the questions are displayed in random order. At the end the score is given</p>
+        
+        <h3>Inspiration:</h3>
+        <p>I recently took a week long Microsoft training bootcamp that required us to memorize 100+ practice multiple choice questions each night. There was study material in PDF form but there 3 issues that were challenging:</p>
+        <li>The correct answer is accidentally revealed when practicing</li>
+        <li>The questions are always in the same order, making it likely to associate answers with the question number</li>
+        <li>The answers are always in the same order, making it likely to assicate an answer with "C" rather than knowing the answer</li>
+        
+
+        <p>This site was my challenge to overcome these problems</p>
+
+        <div class="about-planning">
+            <h2>Planning:</h2>
+            <p>I started with a skecth of how I wanted my site to look:</p>
+            <h4>A New Guide</h4>
+            <img src="/assets/2020-03-04 21.38.47.jpg">
+            <h3>Taking a Quiz</h3>  
+            <img src="/assets/2020-03-04 21.38.22.jpg">
+            <p>Then I sketched out the wireframe</p>
+            <img src="/assets/2020-03-07 10.39.27.jpg">
+            <p>From there a built one feature at a time until I ended up with what you see</p>
+        </div>
+        <h2>Under the Hood:</h2>
+        <p>I used a Models/Views/Controller structure</p>
+        <ul>
+            Models:
+            <li>User Model</li>
+
+            <li>Guide Model. Note how I nexted the question Schema inside the Guide Schema. This presented some challenges referncing the question Schema. In the future I would have just made it completely separate and done a one to many join.</li>
+        </ul>
+        <ul>
+            Views:
+            All the classics:
+            <li>Index</li>
+            <li>New</li>
+            <li>Edit</li>
+            <li>Show</li>
+            And an extension
+            <li>EditList - This one is for editing questions/sub-array data</li>
+        </ul>
+        <ul>
+            Controllers:
+            <li>Users</li>
+            <li>Sessions</li>
+            <li>Guides</li>
+        </ul>
+        <h2>Design:</h2>
+            <h4>Partials</h4>
+            <p> I created 3 partial files, one of the top nav pane, one for the side nav to always show your guides, and one for header information</p>
+            <h4>Styling:</h4>
+            <p> I used Skeleton for CSS and built on top of it</p>
+            <p> I used jquery to help format data when adding study guide material or taking exams</p>
+        <h2>What's Next:</h2>
+        <ul>
+            To-Do List:
+            <li>display multiple choice answers in random order</li>
+            <li>instead choosing number for correct answer, change to selectable item</li>
+            <li>Allow "sets" of questions to share commonn question material in sequence</li>
+            <li>Make site mobile friendly</li>
+            <li>Allow drag and drop selection of questions and answers to quickly add material</li>
+        </ul>
+    </div>
+</body>
+</html>

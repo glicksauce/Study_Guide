@@ -244,6 +244,16 @@ router.get("/", (req,res) => {
       })
 })
 
+// About
+router.get("/about", (req,res) => {
+  Guide.find({}, (error, guides) => {
+    res.render("about.ejs", {
+      guides: guides,
+      currentUser: req.session.currentUser
+    })
+  })
+})
+
 //SEED DATA ROUTE
 router.get('/seed', async (req, res) => {
 

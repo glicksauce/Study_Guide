@@ -106,3 +106,22 @@ form{
 .large-input{
     width: 500px;
 }
+
+.about-container {
+    margin: 15px 0 0 20px;
+}
+
+.about-container h3, .about-container h2{
+    margin: 0;
+}
+.about-planning img{
+    width: 70%;
+}
+
+.about-container li{
+    margin: 0 0 0 25px;
+}
+
+.about-container p{
+    margin: 5px 0;
+}
