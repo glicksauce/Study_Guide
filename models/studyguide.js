@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 //https://mongoosejs.com/docs/subdocs.html
 
@@ -12,7 +13,9 @@ const questionSchema = new mongoose.Schema({
 const guideSchema = new mongoose.Schema({
     guide_name: String,
     description: String,
-    guide_data: [questionSchema]
+    guide_data: [questionSchema],
+    permissions: [{ type: Schema.Types.ObjectId, ref: 'Person'}],
+    public: Boolean
 })
 
 

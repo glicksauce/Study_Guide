@@ -15,6 +15,8 @@ Restful Routes
 const express = require('express')
 const router = express.Router()
 const Guide = require("../models/studyguide.js");
+const User = require("../models/users.js");
+const mongoose = require('mongoose')
 
 // ROUTES
 
@@ -226,17 +228,37 @@ router.put('/:id/newquestion/', (req, res)=>{
 
 // Create
 router.post("/", (req,res) =>{
+  let newID = mongoose.Types.ObjectId()
 
+  Guide.create({
+    _id: newID,
+    guide_name: req.body.guide_name,
+    description: req.body.description,
+    permissions: req.session.currentUser
+  }, (err, guide) =>{
+    if (err) return err
+    res.redirect(`/studyguide/${guide.id}/edit`)
+  })
+
+
+  /*
     Guide.create(req.body, (err, guide) => {
       if (err) return err
       res.redirect(`/studyguide/${guide.id}/edit`)
     })
-    
+  */
 })
 
 // Index
 router.get("/", (req,res) => {
-      Guide.find({}, (error, guides) => {
+
+      Guide.find(
+        {permissions: 
+          { $in: 
+            req.session.currentUser
+          }
+        }
+            , (error, guides) => {
         res.render("index.ejs", {
           guides: guides,
           currentUser: req.session.currentUser
@@ -291,13 +313,16 @@ router.get('/seed', async (req, res) => {
         {
             guide_name: "Sample Quiz 1",
             description: "A sample test",
-            guide_data:  questionSet0
+            guide_data:  questionSet0,
+            public: true
         }
         ,
         {
             guide_name: "Sample Quiz 2",
             description: "A sample test",
-            guide_data: questionSet1
+            guide_data: questionSet1,
+            public: true
+
         }
 
       ]
