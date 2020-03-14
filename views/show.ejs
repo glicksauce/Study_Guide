@@ -31,11 +31,12 @@
                 <div class="quiz-question" id="<%=j%>" >
                     <div class="question">
                         <%=guide.guide_data[j].question%>
+                    </div>
                         <% for (k=0;k < guide.guide_data[j].answers.length; k++) { %>
                             <div class="answer" id="set<%=j%>-answer-<%=k%>"><%=guide.guide_data[j].answers[k]%></div>
                         <% } %>
                         <div class="correct-answer"><%=guide.guide_data[j].correct_answer%></div>
-                    </div>
+                    
                     <input type="button" class="next-button" value="Next Question">
                 </div>
                 
