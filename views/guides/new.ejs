@@ -10,14 +10,15 @@
 <body>
     <%- include("../partials/nav.ejs") %>
     <%- include("../partials/header.ejs") %>
-    <div class="title-title">Study Guide Name:</div>
-    <div class="title-input">
-        <form action="/studyguide" method="POST">
-            <div><input type="text" name="guide_name"></div>
-            <input type="submit" name="" value="Create Study Guide"/>
-        </form>
+    <div class="quiz-container">
+        <div class="title-title">Study Guide Name:</div>
+            <div class="title-input">
+                <form action="/studyguide" method="POST">
+                    <div><input type="text" name="guide_name"></div>
+                    <input type="submit" name="" value="Create Study Guide"/>
+                </form>
+            </div>
+        </div>
     </div>
-
-</div>
 </body>
 </html>

@@ -10,7 +10,11 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res)=>{
     User.findOne({ username: req.body.username },(err, foundUser) => {
-        if( bcrypt.compareSync(req.body.password, foundUser.password) ){
+        if (foundUser == null) {
+            console.log("Username not found")
+            let userNotFound = true;
+            res.render('sessions/new.ejs', {userNotFound});
+        } else  if( bcrypt.compareSync(req.body.password, foundUser.password) ){
             req.session.currentUser = foundUser;
             res.redirect('/');
         } else {

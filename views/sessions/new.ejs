@@ -13,6 +13,9 @@
             <input type="text" name="username" placeholder="username"/>
             <input type="password" placholder="password" name="password" />
             <input type="submit" value="Log In" />
+            <% if (typeof userNotFound != "undefined") { %>
+            <div class="not-found">Username not found</div>
+            <% } %>
         </form>
     </body>
 </html>
