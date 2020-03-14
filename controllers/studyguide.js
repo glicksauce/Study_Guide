@@ -30,6 +30,22 @@ router.get("/json", (req,res) => {
 
 // NEW
 router.get("/new", (req, res) =>{
+
+  Guide.find(
+    {permissions: 
+      { $in: 
+        req.session.currentUser
+      }
+    }
+        , (error, guides) => {
+    res.render("guides/new.ejs", {
+      guides: guides,
+      currentUser: req.session.currentUser
+    })
+  })
+
+
+  /*
   Guide.find({}, (error, guides) => {
 
     res.render("guides/new.ejs", {
@@ -38,9 +54,6 @@ router.get("/new", (req, res) =>{
     })
 
   })
-  /*
-    res.render("guides/new.ejs",
-    )
   */
 })
 
@@ -55,11 +68,19 @@ router.delete("/:id", (req, res) =>{
 // EDIT Expanded - edits an individual question, :id is the guide id, :question is number in the guide_array
 router.get('/:id/edit/list/:question', (req,res) =>{
 
-  Guide.find({}, (error, guides) => {
-    let guide
+  Guide.find(
+    {permissions: 
+      { $in: 
+        req.session.currentUser
+      }
+    }
+        , (error, guides) => {
+  //Guide.find({}, (error, guides) => {
+    
     //need to get all guides so that we can list them in nav bar
     //this is how we also pull the guide we are working with on the show page
     //cycle through all guides and match by element.id
+    let guide
     for (let element of guides){
         //console.log(element.id, req.params.id)
         if (element.id == req.params.id){
@@ -79,28 +100,24 @@ router.get('/:id/edit/list/:question', (req,res) =>{
 
   })
 
-  /*
-  Guide.findById(req.params.id, (err, foundGuide) => {
-    res.render(
-      'guides/edit.ejs',
-      {
-        guides: foundGuide, //all study guide info. Used in Nav panel
-        question: foundGuide.guide_data[req.params.question], //just the selected study guide
-        question_number: req.params.question //position in the array of questions for that study guide
-      }
-    )
-  })
-  */
 })
 
 // EDIT Expanded - gets list of questions
 router.get('/:id/edit/list', (req,res) =>{
   
-  Guide.find({}, (error, guides) => {
-      let guide
+  Guide.find(
+    {permissions: 
+      { $in: 
+        req.session.currentUser
+      }
+    }
+        , (error, guides) => {
+  //Guide.find({}, (error, guides) => {
+      
       //need to get all guides so that we can list them in nav bar
       //this is how we also pull the guide we are working with on the show page
       //cycle through all guides and match by element.id
+      let guide
       for (let element of guides){
           //console.log(element.id, req.params.id)
           if (element.id == req.params.id){
@@ -126,7 +143,13 @@ router.get('/:id/edit/list', (req,res) =>{
 // For adding new questions to existing study guide
 router.get('/:id/edit', (req,res) =>{
 
-  Guide.find({}, (error, guides) => {
+  Guide.find(
+    {permissions: 
+      { $in: 
+        req.session.currentUser
+      }
+    }
+        , (error, guides) => {
     let guide
     //need to get all guides so that we can list them in nav bar
     //this is how we also pull the guide we are working with on the show page
@@ -147,22 +170,9 @@ router.get('/:id/edit', (req,res) =>{
       currentUser: req.session.currentUser
     })
 
-})
-
-  /*
-  Guide.findById(req.params.id, (err, foundGuide) => {
-    res.render(
-      'guides/edit.ejs',
-      {
-        guides: foundGuide,
-        //passing blank question properties
-        question: {id: "", question: "", answers: "", correct_answer:""},
-        question_number: "",
-        currentUser: req.session.currentUser
-      }
-    )
   })
-  */
+
+
 })
 
 // UPDATE for modifying existing question in quide
@@ -240,13 +250,6 @@ router.post("/", (req,res) =>{
     res.redirect(`/studyguide/${guide.id}/edit`)
   })
 
-
-  /*
-    Guide.create(req.body, (err, guide) => {
-      if (err) return err
-      res.redirect(`/studyguide/${guide.id}/edit`)
-    })
-  */
 })
 
 // Index
@@ -268,7 +271,14 @@ router.get("/", (req,res) => {
 
 // About
 router.get("/about", (req,res) => {
-  Guide.find({}, (error, guides) => {
+
+    Guide.find(
+    {permissions: 
+      { $in: 
+        req.session.currentUser
+      }
+    }
+        , (error, guides) => {
     res.render("about.ejs", {
       guides: guides,
       currentUser: req.session.currentUser
@@ -340,7 +350,13 @@ router.get('/seed', async (req, res) => {
 // Show
 router.get("/:id", (req, res) => {
 
-   Guide.find({}, (error, guides) => {
+  Guide.find(
+    {permissions: 
+      { $in: 
+        req.session.currentUser
+      }
+    }
+        , (error, guides) => {
      let guide
 
      //need to get all guides so that we can list them in nav bar
